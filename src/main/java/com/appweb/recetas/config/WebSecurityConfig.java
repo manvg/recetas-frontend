@@ -24,8 +24,8 @@ public class WebSecurityConfig {
             .requestMatchers("/", "/home", "/login", "/authentication/login", "/**.css").permitAll()
             .anyRequest().authenticated()
             )
-            .csrf(CsrfConfigurer::disable) // Deshabilitar CSRF
-            .logout((logout) -> logout.permitAll()); // Permitir logout a todos los usuarios
+            .csrf(CsrfConfigurer::disable)
+            .logout((logout) -> logout.permitAll());
 
         return http.build();
     }
