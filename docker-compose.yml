@@ -1,0 +1,8 @@
+services:
+  frontend:
+    image: appweb_recetas:latest
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    environment:
+      - BACKEND_URL=http://localhost:8084
