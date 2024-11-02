@@ -1,16 +1,90 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Tarjetas de Recetas</title>
+    <link rel="stylesheet" type="text/css" href="body-styles.css">
 </head>
 <body>
-    <h1 th:text="|Bienvenido a ${name}!|"></h1>
-
-    <div sec:authorize="isAuthenticated()">
-        <h1 th:inline="text">Hola <span th:remove="tag" sec:authentication="name"></span>!</h1>
-        <h2>Seguridad implementada con Spring Security</h2>
+    <div class="card-container">
+        <!-- Tarjeta de Ensalada Mediterránea -->
+        <div class="card img">
+            <img src="../images/mediterranean_salad_icon.png" alt="Ensalada Mediterránea">
+            <div class="card-content">
+                <h3>Ensalada Mediterránea</h3>
+                <p>Una mezcla fresca de vegetales, aceitunas y queso feta.</p>
+                <h4>Ingredientes:</h4>
+                <ul>
+                    <li>Lechuga</li>
+                    <li>Tomate</li>
+                    <li>Pepino</li>
+                    <li>Pimientos</li>
+                    <li>Aceitunas negras y verdes</li>
+                    <li>Queso feta</li>
+                    <li>Aceite de oliva y orégano</li>
+                    <li>Sal al gusto</li>
+                </ul>
+                <h4>Paso a Paso:</h4>
+                <ol>
+                    <li>Lava y corta los vegetales (lechuga, tomate, pepino, pimientos) en trozos pequeños.</li>
+                    <li>Añade aceitunas negras y verdes al gusto.</li>
+                    <li>Desmenuza el queso feta y agrégalo a la mezcla.</li>
+                    <li>Rocía con aceite de oliva, sal, y un poco de orégano.</li>
+                    <li>Mezcla bien y sirve frío.</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Tarjeta de Spaghetti al Ajo y Aceite -->
+        <div class="card img">
+            <img src="../images/spaghetti_olive_garlic_icon.png" alt="Spaghetti al Ajo y Aceite">
+            <div class="card-content">
+                <h3>Spaghetti al Ajo y Aceite</h3>
+                <p>Pasta sencilla y deliciosa con ajo, aceite de oliva y perejil.</p>
+                <h4>Ingredientes:</h4>
+                <ul>
+                    <li>200g de espaguetis</li>
+                    <li>3 dientes de ajo</li>
+                    <li>4 cucharadas de aceite de oliva</li>
+                    <li>Perejil fresco picado</li>
+                    <li>Sal al gusto</li>
+                </ul>
+                <h4>Paso a Paso:</h4>
+                <ol>
+                    <li>Hierve agua con sal y cocina los espaguetis hasta que estén al dente.</li>
+                    <li>En una sartén, calienta aceite de oliva y agrega rodajas de ajo.</li>
+                    <li>Cocina el ajo hasta que esté dorado, sin quemarlo.</li>
+                    <li>Escurre la pasta y agrégala a la sartén con el ajo.</li>
+                    <li>Mezcla bien, añade perejil fresco y sirve caliente.</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Tarjeta de Quesadilla de Pollo -->
+        <div class="card">
+            <img src="../images/chicken_quesadilla_icon.png" alt="Quesadilla de Pollo">
+            <div class="card-content">
+                <h3>Quesadilla de Pollo</h3>
+                <p>Pollo desmenuzado y queso derretido en una tortilla dorada.</p>
+                <h4>Ingredientes:</h4>
+                <ul>
+                    <li>1 pechuga de pollo cocida y desmenuzada</li>
+                    <li>Queso rallado al gusto</li>
+                    <li>2 tortillas de maíz o harina</li>
+                    <li>Sal y pimienta al gusto</li>
+                </ul>
+                <h4>Paso a Paso:</h4>
+                <ol>
+                    <li>Desmenuza el pollo cocido y sazónalo con sal y pimienta al gusto.</li>
+                    <li>Calienta una tortilla en una sartén a fuego medio.</li>
+                    <li>Añade una capa de queso rallado y pollo desmenuzado en la mitad de la tortilla.</li>
+                    <li>Dobla la tortilla y cocina hasta que el queso se derrita.</li>
+                    <li>Voltea la quesadilla y dórala ligeramente por el otro lado.</li>
+                    <li>Corta en triángulos y sirve caliente.</li>
+                </ol>
+            </div>
+        </div>
     </div>
 </body>
 </html>
