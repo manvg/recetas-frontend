@@ -7,15 +7,12 @@
     <link rel="stylesheet" type="text/css" href="body-styles.css">
 </head>
 <body>
-    <!-- Barra de navegación superior -->
     <nav class="navbar">
         <div class="menu">
             <a href="/home">Inicio</a>
             <a href="/recetas">Recetas</a>
         </div>
-        <!-- Mostrar botón "Cerrar sesión" solo si el usuario está autenticado -->
         <a th:if="${authenticated}" href="/logout" class="login-button-menu">Cerrar sesión</a>
-        <!-- Mostrar botón "Ingresar" solo si el usuario NO está autenticado -->
         <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ingresar</a>
     </nav>
 
