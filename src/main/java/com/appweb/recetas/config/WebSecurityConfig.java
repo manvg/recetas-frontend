@@ -24,14 +24,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/", "/home", "/login", "/authentication/login", "/**.css").permitAll()
-            .anyRequest().authenticated()
+                .requestMatchers("/", "/home", "/login", "/authentication/login", "/**.css", "/images/**").permitAll()
+                .anyRequest().authenticated()
             )
             .csrf(CsrfConfigurer::disable)
             .logout((logout) -> logout.permitAll());
-
+    
         return http.build();
     }
+    
 
     //#region [CÓDIGO COMENTADO -NO SE UTILIZA ALNACENAMIENTO EN MEMORIA]
     // @Bean

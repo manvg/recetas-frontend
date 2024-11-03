@@ -1,16 +1,51 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Tarjetas de Recetas</title>
+    <link rel="stylesheet" type="text/css" href="body-styles.css">
 </head>
 <body>
-    <h1 th:text="|Bienvenido a ${name}!|"></h1>
+    <!-- Barra de navegación superior -->
+    <nav class="navbar">
+        <div class="menu">
+            <a href="/home">Inicio</a>
+            <a href="/recetas">Recetas</a>
+        </div>
+        <a href="/login" class="login-button-menu">Ingresar</a>
+    </nav>
 
-    <div sec:authorize="isAuthenticated()">
-        <h1 th:inline="text">Hola <span th:remove="tag" sec:authentication="name"></span>!</h1>
-        <h2>Seguridad implementada con Spring Security</h2>
+    <div class="card-container">
+        <!-- Tarjeta de Ensalada Mediterránea -->
+        <div class="card img">
+            <img src="images/mediterranean_salad_icon.png" alt="Ensalada Mediterránea">
+            <div class="card-content">
+                <h3>Ensalada Mediterránea</h3>
+                <p>Una mezcla fresca de vegetales, aceitunas y queso feta.</p>
+                <button class="view-button" onclick="location.href='/detalle-receta'">Ver</button>
+            </div>
+        </div>
+        
+        <!-- Tarjeta de Spaghetti al Ajo y Aceite -->
+        <div class="card img">
+            <img src="images/spaghetti_olive_garlic_icon.png" alt="Spaghetti al Ajo y Aceite">
+            <div class="card-content">
+                <h3>Spaghetti al Ajo y Aceite</h3>
+                <p>Pasta sencilla y deliciosa con ajo, aceite de oliva y perejil.</p>
+                <button class="view-button" onclick="location.href='/detalle-receta'">Ver</button>
+            </div>
+        </div>
+        
+        <!-- Tarjeta de Quesadilla de Pollo -->
+        <div class="card">
+            <img src="images/chicken_quesadilla_icon.png" alt="Quesadilla de Pollo">
+            <div class="card-content">
+                <h3>Quesadilla de Pollo</h3>
+                <p>Pollo desmenuzado y queso derretido en una tortilla dorada.</p>
+                <button class="view-button" onclick="location.href='/detalle-receta'">Ver</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
