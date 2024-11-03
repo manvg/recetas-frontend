@@ -30,32 +30,15 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .permitAll()
             )
-            .csrf(csrf -> csrf.disable())
-            .logout((logout) -> logout.permitAll());
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .addLogoutHandler((request, response, auth) -> tokenStore.clearToken(response))
+            )
+            .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
-
-    //#region [CÓDIGO COMENTADO -NO SE UTILIZA ALMACENAMIENTO EN MEMORIA]
-    // @Bean
-    // @Description("Permite hacer login con datos del usuario almacenados de forma local")
-    // public UserDetailsService users() {
-    //     UserDetails user = User.builder()
-    //         .username("user")
-    //         .password(passwordEncoder().encode("password"))
-    //         .roles("USER")
-    //         .build();
-    //     UserDetails admin = User.builder()
-    //         .username("admin")
-    //         .password(passwordEncoder().encode("password"))
-    //         .roles("USER", "ADMIN")
-    //         .build();
-    //     return new InMemoryUserDetailsManager(user, admin);
-    // }
-
-    // @Bean
-    // public PasswordEncoder passwordEncoder() {
-    //     return new BCryptPasswordEncoder();
-    // }
-    //#endregion
 }
