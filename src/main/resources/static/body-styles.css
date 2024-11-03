@@ -16,6 +16,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    margin-top: 60px; /* Ajusta el valor según la altura de la barra de navegación */
 }
 
 /* Contenedor de tarjetas */
@@ -35,7 +36,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 280px;
+    width: 320px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -95,3 +96,81 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
+ /* Estilos para el header y botón de login */
+ .header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+}
+
+.login-button {
+    background-color: #4CAF50; /* Cambia el color según tu preferencia */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #d2691e;
+}
+
+/* Estilo para el botón de "Ver" */
+.view-button {
+    background-color: #4CAF50; /* Cambia el color si deseas */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.view-button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para la barra de navegación fija en la parte superior */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333; /* Cambia el color según tu preferencia */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+.navbar .menu a:hover {
+    color: #ddd;
+}
+
+.login-button-menu {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.login-button-menu:hover {
+    background-color: #45a049;
+}
+

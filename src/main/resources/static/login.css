@@ -99,8 +99,46 @@ input[type="password"]:focus {
 }
 
   
-  .error {
-    color: red;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
+.error {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+/* Estilos para la barra de navegación fija en la parte superior */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #333; /* Cambia el color según tu preferencia */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000; /* Asegura que esté sobre otros elementos */
+}
+
+.navbar .menu a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+.navbar .menu a:hover {
+  color: #ddd;
+}
+
+.login-button-menu {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.login-button-menu:hover {
+  background-color: #45a049;
+}
+

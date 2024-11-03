@@ -42,9 +42,10 @@ public class WebSecurityConfig {
             )
             .csrf(CsrfConfigurer::disable)
             .logout((logout) -> logout.permitAll());
-
+    
         return http.build();
     }
+    
 
     //#region [CÓDIGO COMENTADO -NO SE UTILIZA ALNACENAMIENTO EN MEMORIA]
     // @Bean
