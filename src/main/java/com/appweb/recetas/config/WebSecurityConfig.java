@@ -4,38 +4,39 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-//#region [IMPORT COMENTADO - NO SE UTILIZA ALMACENAMIENTO EN MEMORIA]
-// import org.springframework.context.annotation.Description;
-// import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.security.core.userdetails.UserDetailsService;
-// import org.springframework.security.core.userdetails.User;
-// import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-// import org.springframework.security.crypto.password.PasswordEncoder;
-//#endregion
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    private final TokenStore tokenStore;
+
+    public WebSecurityConfig(TokenStore tokenStore) {
+        this.tokenStore = tokenStore;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/", "/home", "/login", "/authentication/login", "/**.css", "/images/**").permitAll()
-                .requestMatchers("/detalle-receta**").authenticated()
+                .requestMatchers("/receta/detalles/**").authenticated()
                 .anyRequest().authenticated()
             )
-            .csrf(CsrfConfigurer::disable)
+            .addFilterBefore(new JwtAuthenticationFilter(tokenStore), UsernamePasswordAuthenticationFilter.class)
+            .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+            )
+            .csrf(csrf -> csrf.disable())
             .logout((logout) -> logout.permitAll());
-    
+
         return http.build();
     }
-    
 
-    //#region [CÓDIGO COMENTADO -NO SE UTILIZA ALNACENAMIENTO EN MEMORIA]
+    //#region [CÓDIGO COMENTADO -NO SE UTILIZA ALMACENAMIENTO EN MEMORIA]
     // @Bean
     // @Description("Permite hacer login con datos del usuario almacenados de forma local")
     // public UserDetailsService users() {

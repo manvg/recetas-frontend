@@ -7,13 +7,15 @@
     <link rel="stylesheet" type="text/css" href="body-styles.css">
 </head>
 <body>
-    <!-- Barra de navegación superior -->
     <nav class="navbar">
         <div class="menu">
             <a href="/home">Inicio</a>
             <a href="/recetas">Recetas</a>
         </div>
-        <a href="/login" class="login-button-menu">Ingresar</a>
+        <!-- Mostrar botón "Cerrar sesión" solo si el usuario está autenticado -->
+        <a th:if="${authenticated}" href="/logout" class="login-button-menu">Cerrar sesión</a>
+        <!-- Mostrar botón "Ingresar" solo si el usuario NO está autenticado -->
+        <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ingresar</a>
     </nav>
 
     <div class="card-container">
@@ -23,7 +25,7 @@
             <div class="card-content">
                 <h3>Ensalada Mediterránea</h3>
                 <p>Una mezcla fresca de vegetales, aceitunas y queso feta.</p>
-                <button class="view-button" onclick="location.href='/detalle-receta'">Ver</button>
+                <button class="view-button" th:onclick="|location.href='/detalle-receta'|">Ver</button>
             </div>
         </div>
         
@@ -33,7 +35,7 @@
             <div class="card-content">
                 <h3>Spaghetti al Ajo y Aceite</h3>
                 <p>Pasta sencilla y deliciosa con ajo, aceite de oliva y perejil.</p>
-                <button class="view-button" onclick="location.href='/detalle-receta'">Ver</button>
+                <button class="view-button" th:onclick="|location.href='/detalle-receta'|">Ver</button>
             </div>
         </div>
         
@@ -43,7 +45,7 @@
             <div class="card-content">
                 <h3>Quesadilla de Pollo</h3>
                 <p>Pollo desmenuzado y queso derretido en una tortilla dorada.</p>
-                <button class="view-button" onclick="location.href='/detalle-receta'">Ver</button>
+                <button class="view-button" th:onclick="|location.href='/detalle-receta'|">Ver</button>
             </div>
         </div>
     </div>
