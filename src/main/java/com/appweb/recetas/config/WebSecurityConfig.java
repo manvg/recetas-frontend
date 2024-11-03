@@ -25,6 +25,7 @@ public class WebSecurityConfig {
         http
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/", "/home", "/login", "/authentication/login", "/**.css", "/images/**").permitAll()
+                .requestMatchers("/detalle-receta**").authenticated()
                 .anyRequest().authenticated()
             )
             .csrf(CsrfConfigurer::disable)
