@@ -14,14 +14,14 @@ public class HomeController {
     public String home(@RequestParam(name="name", required=false, defaultValue="Recetas") String name, Model model) {
         setAuthenticationStatus(model);
         model.addAttribute("name", name);
-        return "Home";
+        return "home";
     }
 
     @GetMapping("/")
     public String root(@RequestParam(name="name", required=false, defaultValue="Recetas") String name, Model model) {
         setAuthenticationStatus(model);
         model.addAttribute("name", name);
-        return "Home";
+        return "home";
     }
 
     private void setAuthenticationStatus(Model model) {
