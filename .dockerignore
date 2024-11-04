@@ -2,6 +2,7 @@
 .hg
 .bzr
 .darcs
-BitKeeper/
+BitKeeper
 node_modules
 *.md
+._darcs
