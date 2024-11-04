@@ -19,7 +19,7 @@ public class ContentSecurityPolicyFilter implements Filter {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             httpServletResponse.setHeader("Content-Security-Policy", 
                 "default-src 'self'; " +
-                "script-src 'self'; " + // Elimina 'unsafe-inline'
+                "script-src 'self'; " +
                 "style-src 'self'; " + 
                 "img-src 'self' data:; " + 
                 "font-src 'self'; " +

@@ -23,7 +23,8 @@
             <div class="card-content">
                 <h3>Ensalada Mediterránea</h3>
                 <p>Una mezcla fresca de vegetales, aceitunas y queso feta.</p>
-                <button class="view-button" data-url="/detalle-receta">Ver</button>
+                <a th:if="${authenticated}" href="/detalle-receta" class="login-button-menu">Ver</a>
+                <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ver</a>
             </div>
         </div>
         
@@ -33,7 +34,8 @@
             <div class="card-content">
                 <h3>Spaghetti al Ajo y Aceite</h3>
                 <p>Pasta sencilla y deliciosa con ajo, aceite de oliva y perejil.</p>
-                <button class="view-button" data-url="/detalle-receta">Ver</button>
+                <a th:if="${authenticated}" href="/detalle-receta" class="login-button-menu">Ver</a>
+                <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ver</a>
             </div>
         </div>
         
@@ -43,7 +45,8 @@
             <div class="card-content">
                 <h3>Quesadilla de Pollo</h3>
                 <p>Pollo desmenuzado y queso derretido en una tortilla dorada.</p>
-                <button class="view-button" data-url="/detalle-receta">Ver</button>
+                <a th:if="${authenticated}" href="/detalle-receta" class="login-button-menu">Ver</a>
+                <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ver</a>
             </div>
         </div>
     </div>
