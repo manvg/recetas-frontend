@@ -20,12 +20,13 @@ public class ContentSecurityPolicyFilter implements Filter {
             httpServletResponse.setHeader("Content-Security-Policy", 
                 "default-src 'self'; " +
                 "script-src 'self'; " +
-                "style-src 'self'; " + 
-                "img-src 'self' data:; " + 
+                "style-src 'self'; " +
+                "img-src 'self' data:; " +
                 "font-src 'self'; " +
                 "connect-src 'self'; " +
+                "frame-ancestors 'self'; " +
                 "object-src 'none'; " +
-                "frame-ancestors 'self';"
+                "form-action 'self';"
             );
         }
         chain.doFilter(request, response);

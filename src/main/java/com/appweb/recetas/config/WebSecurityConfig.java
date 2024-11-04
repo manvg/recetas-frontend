@@ -21,7 +21,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/home", "/login", "/authentication/login", "/detalle-receta", "/**.css", "/images/**", "/static/**").permitAll() // Se agregan rutas para imágenes y recursos estáticos
+                .requestMatchers("/", "/home", "/login", "/authentication/login", "/**.css", "/images/**", "/static/**").permitAll()
                 .requestMatchers("/detalle-receta").authenticated()
                 .anyRequest().authenticated()
             )
