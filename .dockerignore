@@ -1,7 +1,6 @@
 .git
 .hg
 .bzr
-.darcs
 BitKeeper
 node_modules
 *.md
