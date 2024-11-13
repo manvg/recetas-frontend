@@ -1,0 +1,113 @@
+/* register-styles.css */
+
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('../images/kitchen_background_cartoon_style.png'); /* Fondo temático de cocina */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Estilo de la barra de navegación */
+.navbar {
+    width: 100%;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+}
+
+.navbar .menu a,
+.navbar .login-button-menu {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.navbar .menu a:hover,
+.navbar .login-button-menu:hover {
+    text-decoration: underline;
+}
+
+/* Estilo del contenedor de registro */
+.register-container {
+    background-color: rgba(255, 248, 240, 0.95); /* Fondo claro con opacidad */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin-top: 80px; /* Desplazamiento para evitar que se superponga con la barra de navegación */
+}
+
+.register-container h2 {
+    color: #d2691e; /* Color cálido */
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Estilo de cada campo del formulario */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #d2691e; /* Resalta en color cálido */
+}
+
+/* Estilo atractivo para el botón de registro */
+.register-button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #d2691e, #ff6347); /* Gradiente cálido */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    margin-top: 20px; /* Separación adicional */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:hover {
+    background: linear-gradient(45deg, #ff6347, #d2691e);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+.register-button:active {
+    transform: translateY(1px);
+}
