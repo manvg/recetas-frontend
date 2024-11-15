@@ -71,7 +71,9 @@ body {
     margin-bottom: 8px;
 }
 
-.form-group input {
+/* Estilos para los campos de entrada de texto y áreas de texto */
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -82,8 +84,15 @@ body {
     transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus {
     border-color: #d2691e; /* Resalta en color cálido */
+}
+
+/* Ajuste para las áreas de texto */
+.form-group textarea {
+    resize: vertical; /* Permite ajustar el tamaño vertical */
+    height: auto; /* Altura inicial se adapta con rows en HTML */
 }
 
 /* Estilo atractivo para el botón de registro */
