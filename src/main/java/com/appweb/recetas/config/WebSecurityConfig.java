@@ -21,8 +21,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/home", "/login","/register", "/nueva-receta", "/api/authentication/login", "/api/usuarios/create", "/**.css", "/images/**", "/static/**").permitAll()
-                .requestMatchers("/detalle-receta").authenticated()
+                .requestMatchers("/", "/home", "/login", "/register", "/api/authentication/login", "/api/usuarios/create", "/**.css", "/images/**", "/static/**").permitAll()
+                .requestMatchers("/detalle-receta", "/nueva-receta").authenticated()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(new JwtAuthenticationFilter(tokenStore), UsernamePasswordAuthenticationFilter.class)

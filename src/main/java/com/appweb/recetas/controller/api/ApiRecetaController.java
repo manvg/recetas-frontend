@@ -4,6 +4,8 @@ import com.appweb.recetas.model.dto.Receta;
 import com.appweb.recetas.model.dto.ResponseModel;
 import com.appweb.recetas.service.RecetaService;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,11 @@ public class ApiRecetaController {
             redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error al intentar crear la receta.");
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/all")
+    public List<Receta> getAllRecetas(HttpServletRequest request) {
+        return recetaService.getAllRecetas(request);
     }
 
     @GetMapping("/create")

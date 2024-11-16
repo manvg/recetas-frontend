@@ -1,7 +1,10 @@
 package com.appweb.recetas.model.dto;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 
 public class Receta {
     private int idReceta;
@@ -37,6 +40,9 @@ public class Receta {
     @NotNull
     @Size(min = 2, max = 50, message = "Debe tener entre 2 y 50 caracteres")
     private String dificultad;
+
+    private List<String> ingredientesList;
+    private List<String> instruccionesList;
 
     public int getIdReceta() {
         return idReceta;
@@ -108,5 +114,21 @@ public class Receta {
 
     public void setDificultad(String dificultad) {
         this.dificultad = dificultad;
+    }
+
+    public List<String> getIngredientesList() {
+        return ingredientesList;
+    }
+    
+    public void setIngredientesList(List<String> ingredientesList) {
+        this.ingredientesList = ingredientesList;
+    }
+    
+    public List<String> getInstruccionesList() {
+        return instruccionesList;
+    }
+    
+    public void setInstruccionesList(List<String> instruccionesList) {
+        this.instruccionesList = instruccionesList;
     }
 }
