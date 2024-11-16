@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Tarjetas de Recetas</title>
+    <title>Detalle de la Receta</title>
     <link rel="stylesheet" type="text/css" href="body-styles.css">
 </head>
 <body>
@@ -18,10 +18,8 @@
     </nav>
 
     <div class="card-container">
-        <!-- Iteración dinámica para recetas -->
-        <div th:each="receta : ${recetas}" class="card img">
-            <!-- Imagen dinámica -->
-            <!-- <img th:src="@{'/images/' + ${receta.idReceta} + '_icon.png'}" th:alt="${receta.nombre}"> -->
+        <div class="card img">
+            <img th:src="@{${receta.url_imagen}}" th:alt="${receta.nombre}">
             <div class="card-content">
                 <h3 th:text="${receta.nombre}">Nombre de la receta</h3>
                 <p th:text="${receta.descripcion}">Descripción</p>
@@ -36,6 +34,5 @@
             </div>
         </div>
     </div>
-    
 </body>
 </html>

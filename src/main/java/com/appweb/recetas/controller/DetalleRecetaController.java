@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.appweb.recetas.controller.api.ApiRecetaController;
 import com.appweb.recetas.model.dto.Receta;
@@ -23,21 +25,21 @@ public class DetalleRecetaController {
         this.apiRecetaController = apiRecetaController;
     }
 
-    @GetMapping("/detalle-receta")
-    public String detalleReceta(Model model, HttpServletRequest request) {
+    @GetMapping("/detalle-receta/{id}")
+    public String detalleReceta(@PathVariable("id") Integer id,Model model,HttpServletRequest request) 
+    {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated = authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser");
 
-        //Obtener recetas desde backend
-        List<Receta> recetas = apiRecetaController.getAllRecetas(request);
+        Receta receta = apiRecetaController.getRecetaById(id, request);
 
-        recetas.forEach(receta -> {
+        if (receta != null) {
             receta.setIngredientesList(Arrays.asList(receta.getIngredientes().split(";")));
             receta.setInstruccionesList(Arrays.asList(receta.getInstrucciones().split(";")));
-        });
+        }
 
         model.addAttribute("authenticated", isAuthenticated);
-        model.addAttribute("recetas", recetas);
+        model.addAttribute("receta", receta);
 
         return "detalle-receta";
     }
