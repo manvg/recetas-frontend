@@ -17,27 +17,42 @@ body {
     padding: 20px;
 }
 
-/* Estilo de la barra de navegación */
+/* Estilos para la barra de navegación fija en la parte superior */
 .navbar {
-    width: 100%;
-    background-color: #333;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
     position: fixed;
     top: 0;
+    width: 100%;
+    background-color: #333; /* Cambia el color según tu preferencia */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
 }
 
-.navbar .menu a,
-.navbar .login-button-menu {
-    color: #fff;
+.navbar .menu a {
+    color: white;
     text-decoration: none;
-    margin-right: 15px;
+    margin: 0 15px;
+    font-size: 16px;
 }
 
-.navbar .menu a:hover,
-.navbar .login-button-menu:hover {
-    text-decoration: underline;
+.navbar .menu a:hover {
+    color: #ddd;
+}
+
+.login-button-menu {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.login-button-menu:hover {
+    background-color: #45a049;
 }
 
 /* Estilo del contenedor de registro */

@@ -13,12 +13,8 @@ public class NuevaRecetaController {
     public String loginPage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated = authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser");
-
-        if (isAuthenticated) {
-            return "redirect:/home";
-        }
-
-        model.addAttribute("authenticated", false);
+        
+        model.addAttribute("authenticated", isAuthenticated);
         return "nueva-receta";
     }
 }

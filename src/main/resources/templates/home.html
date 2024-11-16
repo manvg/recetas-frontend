@@ -11,10 +11,12 @@
         <div class="menu">
             <a href="/home">Inicio</a>
             <a href="/recetas">Recetas</a>
+            <a href="/nueva-receta">Agregar Receta</a>
         </div>
         <a th:if="${authenticated}" href="/logout" class="login-button-menu">Cerrar sesión</a>
         <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ingresar</a>
     </nav>
+
 
     <div class="card-container">
         <!-- Tarjeta de Ensalada Mediterránea -->

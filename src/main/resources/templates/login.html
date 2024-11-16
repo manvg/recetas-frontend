@@ -11,6 +11,7 @@
         <div class="menu">
             <a href="/home">Inicio</a>
             <a href="/recetas">Recetas</a>
+            <a href="/nueva-receta">Agregar Receta</a>
         </div>
         <a th:if="${authenticated}" href="/logout" class="login-button-menu">Cerrar sesión</a>
         <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ingresar</a>
@@ -23,7 +24,7 @@
         <div th:if="${error}" class="error-message">
             Usuario y contraseña inválidos.
         </div>
-        <form id="loginForm" action="/authentication/login" method="post">
+        <form id="loginForm" action="/api/authentication/login" method="post">
             <div class="form-group">
                 <label for="email">Correo Electrónico</label>
                 <input type="text" name="email" id="email" required placeholder="tuemail@ejemplo.com" />

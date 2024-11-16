@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/authentication")
+@RequestMapping("/api/authentication")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
