@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de la Receta</title>
-    <link rel="stylesheet" type="text/css" href="body-styles.css">
+    <!-- Ruta absoluta para el CSS usando Thymeleaf -->
+    <link rel="stylesheet" type="text/css" th:href="@{/body-styles.css}">
 </head>
 <body>
     <nav class="navbar">
         <div class="menu">
-            <a href="/home">Inicio</a>
-            <a href="/recetas">Recetas</a>
-            <a th:if="${authenticated}" href="/nueva-receta">Agregar Receta</a>
+            <!-- Rutas absolutas para los enlaces del menú -->
+            <a th:href="@{/home}">Inicio</a>
+            <a th:href="@{/recetas}">Recetas</a>
+            <a th:if="${authenticated}" th:href="@{/nueva-receta}">Agregar Receta</a>
         </div>
-        <a th:if="${authenticated}" href="/logout" class="login-button-menu">Cerrar sesión</a>
-        <a th:if="${!authenticated}" href="/login" class="login-button-menu">Ingresar</a>
+        <a th:if="${authenticated}" th:href="@{/logout}" class="login-button-menu">Cerrar sesión</a>
+        <a th:if="${!authenticated}" th:href="@{/login}" class="login-button-menu">Ingresar</a>
     </nav>
 
     <div class="card-container">
         <div class="card img">
-            <img th:src="@{${receta.url_imagen}}" th:alt="${receta.nombre}">
+            <!-- Ruta absoluta para la imagen -->
+            <img th:src="@{'/' + ${receta.url_imagen}}" th:alt="${receta.nombre}">
             <div class="card-content">
                 <h3 th:text="${receta.nombre}">Nombre de la receta</h3>
                 <p th:text="${receta.descripcion}">Descripción</p>
