@@ -88,20 +88,10 @@ public class RecetaService {
             uriBuilder.queryParam("dificultad", dificultad);
         }
 
-        //Construir la URL final
         String finalUrl = uriBuilder.toUriString();
-
-        //Obtener el token para la autenticación
-        //String token = tokenStore.getToken(request);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        // if (token != null) {
-        //     headers.setBearerAuth(token);
-        // } else {
-        //     return Collections.emptyList();
-        // }
-
         HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
 
         try {
