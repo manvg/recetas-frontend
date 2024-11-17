@@ -20,7 +20,7 @@
     <!-- Contenedor del formulario de registro -->
     <div class="register-container">
         <h2>Creación de nueva receta</h2>
-        <form action="/api/recetas/create" method="post">
+        <form action="/api/recetas/create" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre">Nombre de la receta</label>
                 <input type="text" id="nombre" name="nombre" required>
@@ -52,6 +52,16 @@
             <div class="form-group">
                 <label for="dificultad">Dificultad</label>
                 <input type="text" id="dificultad" name="dificultad" required>
+            </div>
+            <!-- Campo para cargar imágenes -->
+            <div class="form-group">
+                <label for="foto">Foto de la receta</label>
+                <input type="file" id="foto" name="foto" accept="image/*">
+            </div>
+            <!-- Campo para cargar videos -->
+            <div class="form-group">
+                <label for="video">Video de la receta (opcional)</label>
+                <input type="file" id="video" name="video" accept="video/*">
             </div>
             <button type="submit" class="register-button">Publicar Receta</button>
         </form>

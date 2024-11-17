@@ -135,3 +135,16 @@ body {
 .register-button:active {
     transform: translateY(1px);
 }
+
+.form-group input[type="file"] {
+    border: none;
+    font-size: 1em;
+    background-color: transparent;
+    color: #555;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]:hover {
+    color: #d2691e; /* Color cálido para hover */
+}
+

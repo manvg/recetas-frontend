@@ -5,7 +5,6 @@ import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
 public class Receta {
     private int idReceta;
 
@@ -41,10 +40,13 @@ public class Receta {
     @Size(min = 2, max = 50, message = "Debe tener entre 2 y 50 caracteres")
     private String dificultad;
 
-    private String url_imagen;
+    private String url_imagen; // URL de la imagen de la receta
+    private String url_video;  // URL del video de la receta
 
     private List<String> ingredientesList;
     private List<String> instruccionesList;
+
+    // Getters y Setters
 
     public int getIdReceta() {
         return idReceta;
@@ -124,6 +126,14 @@ public class Receta {
 
     public void setUrl_imagen(String url_imagen) {
         this.url_imagen = url_imagen;
+    }
+
+    public String getUrl_video() {
+        return url_video;
+    }
+
+    public void setUrl_video(String url_video) {
+        this.url_video = url_video;
     }
 
     public List<String> getIngredientesList() {
