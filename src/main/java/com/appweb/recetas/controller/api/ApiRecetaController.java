@@ -43,7 +43,7 @@ public class ApiRecetaController {
                 foto.transferTo(new File(fotoPath));
 
                 String urlPath = Constants.PATH_SAVE_IMAGES + foto.getOriginalFilename();
-                receta.setUrl_imagen(urlPath);
+                receta.setUrlImagen(urlPath);
             }
 
             if (video != null && !video.isEmpty()) {
@@ -58,7 +58,7 @@ public class ApiRecetaController {
                 video.transferTo(new File(videoPath));
             
                 String urlPath = Constants.PATH_SAVE_VIDEOS + video.getOriginalFilename();
-                receta.setUrl_video(urlPath);
+                receta.setUrlVideo(urlPath);
             }
 
             ResponseModel responseModel = recetaService.create(receta, request, response);
