@@ -26,7 +26,6 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(@RequestParam(name = "name", required = false, defaultValue = "Recetas") String name,@RequestParam(name = "nombre", required = false) String nombre,@RequestParam(name = "descripcion", required = false) String descripcion,@RequestParam(name = "tipoCocina", required = false) String tipoCocina,@RequestParam(name = "paisOrigen", required = false) String paisOrigen,@RequestParam(name = "dificultad", required = false) String dificultad,HttpServletRequest request,Model model) {
-        setAuthenticationStatus(model);
 
         model.addAttribute("name", name);
 
@@ -34,6 +33,7 @@ public class HomeController {
         if (recetas == null) {
             recetas = Collections.emptyList();
         }
+        setAuthenticationStatus(model);
         model.addAttribute("recetas", recetas);
 
         return "home";

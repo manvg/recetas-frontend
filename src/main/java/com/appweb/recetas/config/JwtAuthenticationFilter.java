@@ -27,14 +27,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
-
-        // Obtener el token JWT de la cookie de autenticación
+            throws ServletException, IOException 
+    {
         String token = tokenStore.getToken(request);
 
         if (StringUtils.hasText(token) && validateToken(token)) {
             Claims claims = Jwts.parserBuilder()
-                .setSigningKey(Constants.SECRET_KEY.getBytes())
+                .setSigningKey(Constants.getSecretKey().getBytes()) // Obtener clave secreta
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -54,7 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(Constants.SECRET_KEY.getBytes()).build().parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(Constants.getSecretKey().getBytes()).build().parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;
