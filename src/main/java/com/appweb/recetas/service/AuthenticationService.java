@@ -43,25 +43,21 @@ public class AuthenticationService {
         HttpEntity<LoginDto> requestEntity = new HttpEntity<>(loginDto, headers);
 
         try {
-            //Llamada a la API "recetas_backend"
             ResponseEntity<AuthResponse> apiResponse = restTemplate.exchange(backendLoginUrl, HttpMethod.POST, requestEntity, AuthResponse.class);
 
-            if (apiResponse.getStatusCode().is2xxSuccessful() && apiResponse.getBody() != null) {
-                String token = apiResponse.getBody().getToken();
+            AuthResponse authResponse = apiResponse.getBody();
+            if (apiResponse.getStatusCode().is2xxSuccessful() && authResponse != null) {
+                String token = authResponse.getToken();
 
-                //Guardar el token en una cookie a través de TokenStore
                 tokenStore.setToken(response, token);
 
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 authorities.add(new SimpleGrantedAuthority(ROLE_USER));
 
-                //Crear token de autenticación y establecerlo en el contexto de seguridad
-                Authentication authenticatedToken = new UsernamePasswordAuthenticationToken(
-                    loginDto.getEmail(), null, authorities
-                );
+                Authentication authenticatedToken = new UsernamePasswordAuthenticationToken(loginDto.getEmail(), null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authenticatedToken);
 
-                return apiResponse.getBody();
+                return authResponse;
             } else {
                 return new AuthResponse(false, null, "Usuario y contraseña inválidos.");
             }
