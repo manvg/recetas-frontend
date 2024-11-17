@@ -40,8 +40,9 @@ public class Receta {
     @Size(min = 2, max = 50, message = "Debe tener entre 2 y 50 caracteres")
     private String dificultad;
 
-    private String url_imagen; // URL de la imagen de la receta
-    private String url_video;  // URL del video de la receta
+    private String url_imagen; 
+    
+    private String url_video;
 
     private List<String> ingredientesList;
     private List<String> instruccionesList;

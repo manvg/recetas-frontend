@@ -1,9 +1,11 @@
 package com.appweb.recetas.controller.api;
 
+import com.appweb.recetas.config.Constants;
 import com.appweb.recetas.model.dto.Receta;
 import com.appweb.recetas.model.dto.ResponseModel;
 import com.appweb.recetas.service.RecetaService;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -26,42 +28,52 @@ public class ApiRecetaController {
     }
 
     @PostMapping("/create")
-public String createReceta(
-        @ModelAttribute Receta receta,
-        @RequestParam(value = "foto", required = false) MultipartFile foto,
-        @RequestParam(value = "video", required = false) MultipartFile video,
-        RedirectAttributes redirectAttributes,
-        HttpServletRequest request,
-        HttpServletResponse response) {
-    try {
-        // Manejar la foto (opcional)
-        if (foto != null && !foto.isEmpty()) {
-            String fotoPath = "uploads/images/" + foto.getOriginalFilename();
-            foto.transferTo(new java.io.File(fotoPath)); // Guardar localmente
-            receta.setUrl_imagen(fotoPath); // Asocia la ruta de la foto con la receta
-        }
+    public String createReceta(@ModelAttribute Receta receta, @RequestParam(value = "foto", required = false) MultipartFile foto, @RequestParam(value = "video", required = false) MultipartFile video, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) 
+    {
+        try {
+            if (foto != null && !foto.isEmpty()) {
+                String pathImg = new File(Constants.ABSOLUTE_PATH_IMAGES).getAbsolutePath();
+                
+                File directory = new File(pathImg);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                String fotoPath = pathImg + File.separator + foto.getOriginalFilename();
+            
+                foto.transferTo(new File(fotoPath));
 
-        // Manejar el video (opcional)
-        if (video != null && !video.isEmpty()) {
-            String videoPath = "uploads/videos/" + video.getOriginalFilename();
-            video.transferTo(new java.io.File(videoPath)); // Guardar localmente
-            receta.setUrl_video(videoPath);; // Asocia la ruta del video con la receta
-        }
+                String urlPath = Constants.PATH_SAVE_IMAGES + foto.getOriginalFilename();
+                receta.setUrl_imagen(urlPath);
+            }
 
-        // Lógica original de creación de receta
-        ResponseModel responseModel = recetaService.create(receta, request, response);
+            if (video != null && !video.isEmpty()) {
+                String pathVideo = new File(Constants.ABSOLUTE_PATH_VIDEOS).getAbsolutePath();
+            
+                File directory = new File(pathVideo);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                String videoPath = pathVideo + File.separator + video.getOriginalFilename();
+            
+                video.transferTo(new File(videoPath));
+            
+                String urlPath = Constants.PATH_SAVE_VIDEOS + video.getOriginalFilename();
+                receta.setUrl_video(urlPath);
+            }
 
-        if (responseModel.getStatus()) {
-            return "redirect:/home";
-        } else {
-            redirectAttributes.addFlashAttribute("error", responseModel.getMessage());
+            ResponseModel responseModel = recetaService.create(receta, request, response);
+
+            if (responseModel.getStatus()) {
+                return "redirect:/home";
+            } else {
+                redirectAttributes.addFlashAttribute("error", responseModel.getMessage());
+                return "redirect:/login";
+            }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error al intentar crear la receta.");
             return "redirect:/login";
         }
-    } catch (Exception e) {
-        redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error al intentar crear la receta.");
-        return "redirect:/login";
     }
-}
 
     @GetMapping("/all")
     public List<Receta> getAllRecetas(@RequestParam(name = "nombre", required = false) String nombre,@RequestParam(name = "descripcion", required = false) String descripcion,@RequestParam(name = "tipoCocina", required = false) String tipoCocina,@RequestParam(name = "paisOrigen", required = false) String paisOrigen,@RequestParam(name = "dificultad", required = false) String dificultad,HttpServletRequest request) 
