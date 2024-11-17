@@ -66,7 +66,7 @@ public class RecetaService {
         }
     }
 
-    public List<Receta> getAllRecetas(String nombre,String descripcion,String tipoCocina,String paisOrigen,String dificultad,HttpServletRequest request) 
+    public List<Receta> getAllRecetas(String nombre,String descripcion,String tipoCocina,String paisOrigen,String dificultad) 
     {
         String backendUrl = Constants.BACKEND_URL + "/api/recetas";
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(backendUrl);

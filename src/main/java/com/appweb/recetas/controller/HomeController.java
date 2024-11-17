@@ -25,11 +25,11 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(@RequestParam(name = "name", required = false, defaultValue = "Recetas") String name,@RequestParam(name = "nombre", required = false) String nombre,@RequestParam(name = "descripcion", required = false) String descripcion,@RequestParam(name = "tipoCocina", required = false) String tipoCocina,@RequestParam(name = "paisOrigen", required = false) String paisOrigen,@RequestParam(name = "dificultad", required = false) String dificultad,HttpServletRequest request,Model model) {
+    public String home(@RequestParam(name = "name", required = false, defaultValue = "Recetas") String name,@RequestParam(name = "nombre", required = false) String nombre,@RequestParam(name = "descripcion", required = false) String descripcion,@RequestParam(name = "tipoCocina", required = false) String tipoCocina,@RequestParam(name = "paisOrigen", required = false) String paisOrigen,@RequestParam(name = "dificultad", required = false) String dificultad,Model model) {
 
         model.addAttribute("name", name);
 
-        List<Receta> recetas = apiRecetaController.getAllRecetas(nombre, descripcion, tipoCocina, paisOrigen, dificultad, request);
+        List<Receta> recetas = apiRecetaController.getAllRecetas(nombre, descripcion, tipoCocina, paisOrigen, dificultad);
         if (recetas == null) {
             recetas = Collections.emptyList();
         }
@@ -47,10 +47,9 @@ public class HomeController {
         @RequestParam(name = "tipoCocina", required = false) String tipoCocina,
         @RequestParam(name = "paisOrigen", required = false) String paisOrigen,
         @RequestParam(name = "dificultad", required = false) String dificultad,
-        HttpServletRequest request,
         Model model
     ) {
-        return home(name, nombre, descripcion, tipoCocina, paisOrigen, dificultad, request, model);
+        return home(name, nombre, descripcion, tipoCocina, paisOrigen, dificultad, model);
     }
     
 

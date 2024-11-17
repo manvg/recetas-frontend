@@ -76,9 +76,9 @@ public class ApiRecetaController {
     }
 
     @GetMapping("/all")
-    public List<Receta> getAllRecetas(@RequestParam(name = "nombre", required = false) String nombre,@RequestParam(name = "descripcion", required = false) String descripcion,@RequestParam(name = "tipoCocina", required = false) String tipoCocina,@RequestParam(name = "paisOrigen", required = false) String paisOrigen,@RequestParam(name = "dificultad", required = false) String dificultad,HttpServletRequest request) 
+    public List<Receta> getAllRecetas(@RequestParam(name = "nombre", required = false) String nombre,@RequestParam(name = "descripcion", required = false) String descripcion,@RequestParam(name = "tipoCocina", required = false) String tipoCocina,@RequestParam(name = "paisOrigen", required = false) String paisOrigen,@RequestParam(name = "dificultad", required = false) String dificultad) 
     {
-        List<Receta> recetas = recetaService.getAllRecetas(nombre, descripcion, tipoCocina, paisOrigen, dificultad, request);
+        List<Receta> recetas = recetaService.getAllRecetas(nombre, descripcion, tipoCocina, paisOrigen, dificultad);
         if (recetas == null) {
             throw new RuntimeException("Error al obtener las recetas. Verifique la configuración del backend.");
         }
