@@ -31,8 +31,12 @@ public class HiddenFilesFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
+    public void init(FilterConfig filterConfig) throws ServletException {
+        //Este método está intencionadamente vacío porque no es necesario inicializar nada.
+    }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+        //Este método está intencionadamente vacío porque no es necesario realizar limpieza de recursos.
+    }
 }
