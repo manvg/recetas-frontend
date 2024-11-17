@@ -17,22 +17,23 @@ public class WebSecurityConfig {
         this.tokenStore = tokenStore;
     }
 
+    private static final String LOGIN_ENDPOINT = "/login";
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/home", "/login", "/register", "/api/authentication/login", "/api/usuarios/create", "/**.css", "/images/**", "/videos/**", "/static/**").permitAll()
+                .requestMatchers("/", "/home", LOGIN_ENDPOINT, "/register", "/api/authentication/login", "/api/usuarios/create", "/**.css", "/images/**", "/videos/**", "/static/**").permitAll()
                 .requestMatchers("/detalle-receta", "/nueva-receta").authenticated()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(new JwtAuthenticationFilter(tokenStore), UsernamePasswordAuthenticationFilter.class)
             .formLogin(form -> form
-                .loginPage("/login")
+                .loginPage(LOGIN_ENDPOINT)
                 .permitAll()
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl(LOGIN_ENDPOINT)
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .addLogoutHandler((request, response, auth) -> tokenStore.clearToken(response))
