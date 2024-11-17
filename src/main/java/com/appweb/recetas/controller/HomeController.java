@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.appweb.recetas.controller.api.ApiRecetaController;
 import com.appweb.recetas.model.dto.Receta;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Controller
 public class HomeController {
 
