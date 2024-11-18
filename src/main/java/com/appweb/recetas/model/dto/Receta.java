@@ -89,7 +89,7 @@ public class Receta {
         this.instrucciones = instrucciones;
     }
 
-    public String getTipo_cocina() {
+    public String getTipoCocina() {
         return tipoCocina;
     }
 

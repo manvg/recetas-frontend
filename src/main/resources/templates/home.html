@@ -19,7 +19,7 @@
 
     <div class="card-container" th:if="${recetas != null && !recetas.isEmpty()}">
         <div th:each="receta : ${recetas}" class="card img">
-            <img th:src="${receta.url_imagen}" th:alt="${receta.nombre}" />
+            <img th:src="${receta.urlImagen}" th:alt="${receta.nombre}" />
             <div class="card-content">
                 <h3 th:text="${receta.nombre}">Nombre de la receta</h3>
                 <p th:text="${receta.descripcion}">Descripción de la receta</p>
