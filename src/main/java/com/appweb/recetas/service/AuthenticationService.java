@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,8 +36,11 @@ public class AuthenticationService {
     @Autowired
     private TokenStore tokenStore;
 
+    @Value("${backend.url}")
+    private String backendUrl;
+
     public AuthResponse authenticate(LoginDto loginDto, HttpServletResponse response) {
-        String backendLoginUrl = Constants.BACKEND_URL + Constants.BACKEND_URL_AUTH;
+        String backendLoginUrl = backendUrl + Constants.BACKEND_URL_AUTH;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 

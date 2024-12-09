@@ -1,6 +1,7 @@
 package com.appweb.recetas.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,9 +12,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import com.appweb.recetas.config.Constants;
-import com.appweb.recetas.config.TokenStore;
 import com.appweb.recetas.model.dto.ResponseModel;
 import com.appweb.recetas.model.dto.Usuario;
 
@@ -23,11 +21,11 @@ public class UsuarioService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    private TokenStore tokenStore;
+    @Value("${backend.url}")
+    private String urlBackend;
 
     public ResponseModel create(Usuario usuario, HttpServletRequest request, HttpServletResponse response) {
-        String backendUrl = Constants.BACKEND_URL + "/api/usuarios";
+        String backendUrl = urlBackend + "/api/usuarios";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -3,6 +3,7 @@ package com.appweb.recetas.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,11 +18,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.appweb.recetas.config.Constants;
 import com.appweb.recetas.config.TokenStore;
 import com.appweb.recetas.model.dto.Receta;
 import com.appweb.recetas.model.dto.ResponseModel;
-import org.springframework.core.ParameterizedTypeReference;
 import java.util.Collections;
 
 @Service
@@ -33,8 +32,11 @@ public class RecetaService {
     @Autowired
     private TokenStore tokenStore;
 
+    @Value("${backend.url}")
+    private String urlBackend;
+
     public ResponseModel create(Receta receta, HttpServletRequest request, HttpServletResponse response) {
-        String backendUrl = Constants.BACKEND_URL + "/api/recetas";
+        String backendUrl = urlBackend + "/api/recetas";
         // Obtiene el token desde el TokenStore
         String token = tokenStore.getToken(request);
         
@@ -68,7 +70,7 @@ public class RecetaService {
 
     public List<Receta> getAllRecetas(String nombre,String descripcion,String tipoCocina,String paisOrigen,String dificultad) 
     {
-        String backendUrl = Constants.BACKEND_URL + "/api/recetas";
+        String backendUrl = urlBackend + "/api/recetas";
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(backendUrl);
 
         // Agregar parámetros opcionales a la URL
@@ -111,7 +113,7 @@ public class RecetaService {
     }
 
     public Receta getRecetaById(Integer id, HttpServletRequest request) {
-        String backendUrl = Constants.BACKEND_URL + "/api/recetas/" + id;
+        String backendUrl = urlBackend + "/api/recetas/" + id;
     
         String token = tokenStore.getToken(request);
     
