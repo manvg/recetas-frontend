@@ -1,5 +1,8 @@
 package com.appweb.recetas.config;
 
+import java.util.Map;
+import java.util.function.Supplier;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,12 +18,22 @@ public class Constants {
     public static final String PATH_SAVE_IMAGES = "images/";
     public static final String PATH_SAVE_VIDEOS = "videos/";
 
+    private static Supplier<String> environmentSupplier = () -> System.getenv("JWT_SECRET");
+
     public String getBackendUrl() {
         return backendUrl;
     }
 
+    public static void setEnvironmentSupplier(Supplier<String> supplier) {
+        environmentSupplier = supplier;
+    }
+
+    public static void resetEnvironmentSupplier() {
+        environmentSupplier = () -> System.getenv("JWT_SECRET");
+    }
+
     public static String getSecretKey() {
-        String secretKey = System.getenv("JWT_SECRET");
+        String secretKey = environmentSupplier.get();
         if (secretKey == null || secretKey.isEmpty()) {
             throw new IllegalStateException("La variable de entorno JWT_SECRET no está configurada.");
         }

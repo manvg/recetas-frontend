@@ -18,10 +18,11 @@ public class WebSecurityConfig {
     }
 
     private static final String LOGIN_ENDPOINT = "/login";
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((requests) -> requests
+            .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/", "/home", LOGIN_ENDPOINT, "/register", "/api/authentication/login", "/api/usuarios/create", "/**.css", "/images/**", "/videos/**", "/static/**").permitAll()
                 .requestMatchers("/detalle-receta", "/nueva-receta").authenticated()
                 .anyRequest().authenticated()

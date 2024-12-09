@@ -6,8 +6,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class RecetasApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
 
+    }
+
+    @Test
+    void testMainMethod() {
+        String[] args = {};
+        RecetasApplication.main(args);
+    }
 }

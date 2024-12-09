@@ -9,14 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.env.Environment;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +55,7 @@ class RecetaServiceTest {
         org.springframework.test.util.ReflectionTestUtils.setField(recetaService, "urlBackend", backendUrl);
     }
 
+    // Métodos existentes: no se han eliminado
     @Test
     void testCreateRecetaSuccess() {
         Receta receta = new Receta();
@@ -92,6 +91,46 @@ class RecetaServiceTest {
 
         assertFalse(result.getStatus());
         assertEquals("Token no encontrado. Inicie sesión nuevamente.", result.getMessage());
+    }
+
+    @Test
+    void testCreateRecetaHttpClientErrorException() {
+        Receta receta = new Receta();
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        when(tokenStore.getToken(request)).thenReturn("mock-token");
+        when(restTemplate.exchange(
+            eq(backendUrl + "/api/recetas"),
+            eq(HttpMethod.POST),
+            any(HttpEntity.class),
+            eq(ResponseModel.class)
+        )).thenThrow(new HttpClientErrorException(org.springframework.http.HttpStatus.BAD_REQUEST, "Error del servidor"));
+
+        ResponseModel result = recetaService.create(receta, request, response);
+
+        assertFalse(result.getStatus());
+        assertTrue(result.getMessage().contains("Error de comunicación con el servidor:"));
+    }
+
+    @Test
+    void testCreateRecetaUnexpectedError() {
+        Receta receta = new Receta();
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        when(tokenStore.getToken(request)).thenReturn("mock-token");
+        when(restTemplate.exchange(
+            eq(backendUrl + "/api/recetas"),
+            eq(HttpMethod.POST),
+            any(HttpEntity.class),
+            eq(ResponseModel.class)
+        )).thenThrow(new RuntimeException("Error inesperado"));
+
+        ResponseModel result = recetaService.create(receta, request, response);
+
+        assertFalse(result.getStatus());
+        assertTrue(result.getMessage().contains("Error inesperado:"));
     }
 
     @Test
@@ -179,5 +218,71 @@ class RecetaServiceTest {
         });
 
         assertTrue(exception.getMessage().contains("Error al obtener la receta:"));
+    }
+
+    @Test
+    void testGetAllRecetasWithFilters() {
+        // Caso donde todos los filtros están presentes
+        List<Receta> mockRecetas = List.of(new Receta(), new Receta());
+
+        when(restTemplate.exchange(
+            contains("nombre=nombre"),
+            eq(HttpMethod.GET),
+            any(HttpEntity.class),
+            any(ParameterizedTypeReference.class)
+        )).thenReturn(ResponseEntity.ok(mockRecetas));
+
+        List<Receta> result = recetaService.getAllRecetas("nombre", "descripcion", "tipoCocina", "paisOrigen", "dificultad");
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    void testGetAllRecetasWithoutFilters() {
+        // Caso donde no se envían filtros
+        when(restTemplate.exchange(
+            eq(backendUrl + "/api/recetas"),
+            eq(HttpMethod.GET),
+            any(HttpEntity.class),
+            any(ParameterizedTypeReference.class)
+        )).thenReturn(ResponseEntity.ok(Collections.emptyList()));
+
+        List<Receta> result = recetaService.getAllRecetas(null, null, null, null, null);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testGetAllRecetasHttpClientErrorException() {
+        //Caso donde ocurre un HttpClientErrorException
+        when(restTemplate.exchange(
+            anyString(),
+            eq(HttpMethod.GET),
+            any(HttpEntity.class),
+            any(ParameterizedTypeReference.class)
+        )).thenThrow(new HttpClientErrorException(org.springframework.http.HttpStatus.BAD_REQUEST));
+
+        List<Receta> result = recetaService.getAllRecetas("nombre", null, null, null, null);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testGetAllRecetasUnexpectedError() {
+        //Caso donde ocurre un error inesperado
+        when(restTemplate.exchange(
+            anyString(),
+            eq(HttpMethod.GET),
+            any(HttpEntity.class),
+            any(ParameterizedTypeReference.class)
+        )).thenThrow(new RuntimeException("Error inesperado"));
+
+        List<Receta> result = recetaService.getAllRecetas("nombre", null, null, null, null);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 }
