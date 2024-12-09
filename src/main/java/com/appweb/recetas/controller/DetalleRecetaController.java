@@ -26,21 +26,20 @@ public class DetalleRecetaController {
     }
 
     @GetMapping("/detalle-receta/{id}")
-    public String detalleReceta(@PathVariable("id") Integer id,Model model,HttpServletRequest request) 
-    {
+    public String detalleReceta(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAuthenticated = authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser");
-
+        boolean isAuthenticated = authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName());
+    
         Receta receta = apiRecetaController.getRecetaById(id, request);
-
+    
         if (receta != null) {
             receta.setIngredientesList(Arrays.asList(receta.getIngredientes().split(";")));
             receta.setInstruccionesList(Arrays.asList(receta.getInstrucciones().split(";")));
         }
-
+    
         model.addAttribute("authenticated", isAuthenticated);
         model.addAttribute("receta", receta);
-
+    
         return "detalle-receta";
     }
 }
